@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: araps-escrow-backend
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server.js
+    env:
+      - key: PORT
+        value: 3001
+      - key: INFURA_URL
+        sync: false
+      - key: PRIVATE_KEY
+        sync: false
+      - key: CONTRACT_ADDRESS
+        sync: false
+
+  - type: web
+    name: araps-escrow-frontend
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: serve -s build
+    env:
+      - key: REACT_APP_API_URL
+        value: https://araps-escrow-backend.onrender.com
+      - key: REACT_APP_CONTRACT_ADDRESS
+        sync: false
